@@ -17,3 +17,11 @@ L'admin del gruppo attiva il bot, i componenti del gruppo condividono la loro po
 
 - [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot) : interfaccia python per le API telegram
 - [utm](https://github.com/Turbo87/utm) : convertitore da formato posizione "latitudine longitudine" a UTM WGS84
+
+
+**avviare il progetto**
+- cd projectfolder
+- pipenv install // si installa tutte le dipendenze elencate nel file di configuraizone
+- pipenv run python main.py //runna il l'eseguibile che si interfaccia con le API Telegram
+
+NB: avviare ngrok sulla porta 5000 con protocollo TLS

@@ -9,7 +9,7 @@ import logging
 from location_model import ChatLocations
 
 # parametri di configurazione per server e token per API Telegram
-base_url = 'https://ff9d238a.ngrok.io' + '/'
+base_url = 'https://71df8ac5.ngrok.io' + '/'
 bot_token = '895587413:AAFNlfhLq2x0xMgBWByQQAZeIueUn5EfiWw'
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -22,6 +22,7 @@ bot_instance.set_webhook(base_url + secret_token)
 logger.info('Webhook URL set to %s', base_url + secret_token)
 
 dispatcher = Dispatcher(bot_instance, None, workers=0, use_context=True)
+#repository con tutta la chat avviato il bot
 chat_repository = {}
 
 
@@ -43,6 +44,7 @@ def start_tracking_handler(update: Update, context: CallbackContext):
         context.bot.send_message(chat_id=update.effective_message.chat_id,
                                  text='You must be a group admin to start location tracking')
         return
+
     if update.effective_message.chat_id not in chat_repository:
         chat_repository[update.effective_message.chat_id] = ChatLocations(update.effective_message.chat_id)
     if not chat_repository[update.effective_message.chat_id].tracking_active:
@@ -58,6 +60,7 @@ def stop_tracking_handler(update: Update, context: CallbackContext):
         context.bot.send_message(chat_id=update.effective_message.chat_id,
                                  text='You must be a group admin to stop location tracking')
         return
+
     if update.effective_message.chat_id in chat_repository and chat_repository[
         update.effective_message.chat_id].tracking_active:
         chat_repository[update.message.chat_id].tracking_active = False
@@ -72,6 +75,7 @@ def reset_locations_handler(update: Update, context: CallbackContext):
         context.bot.send_message(chat_id=update.effective_message.chat_id,
                                  text='You must be a group admin to reset location data')
         return
+
     if update.effective_message.chat_id in chat_repository:
         chat_repository[update.message.chat_id].location_list = {}
         context.bot.send_message(chat_id=update.effective_message.chat_id, text='Location data reset')
@@ -141,6 +145,7 @@ def main():
 
 @app.route('/{token}')
 async def handle_update(req, resp, *, token):
+#avvio un thread in background che rimane in ascolto per le nuove richieste sulla chat
     @app.background.task
     def process_data(json_update):
         rec_update = Update.de_json(json_update, bot_instance)
