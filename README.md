@@ -1,25 +1,25 @@
-PROGETTO PYTHON
+#PROGETTO PYTHON 2018/2019
 
-**Dominio**
+##Dominio
 
 bot telegram che inserito all'interno di un group chat monitora la posizione geografica di ogni partecipante 
 e converte la posizione in UTM WSG84(uno dei map datum più utilizzati e comodi in ambito cartografico)
 
-**Funzionamento**  
+##Funzionamento  
 
 L'admin del gruppo attiva il bot, i componenti del gruppo condividono la loro posizione iniziale
 
-**Comandi**
+##Comandi
 
 `/start`avvia il trac
 
-**Librerie utilizzate**
+##Librerie utilizzate
 
 - [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot) : interfaccia python per le API telegram
 - [utm](https://github.com/Turbo87/utm) : convertitore da formato posizione "latitudine longitudine" a UTM WGS84
 
 
-**avviare il progetto**
+##Avviare il progetto
 - cd projectfolder
 - pipenv install // si installa tutte le dipendenze elencate nel file di configuraizone
 - pipenv run python main.py //runna il l'eseguibile che si interfaccia con le API Telegram
